@@ -13,29 +13,24 @@ def main(argv: list[str]):
 
 def Rot13(s: str) -> str:
     outputString: str = str()
-    isLowercase: bool = bool()
+    alphabet: list[str]
 
     for char in s:
         if lowercase.__contains__(char):
-            isLowercase = True
+            alphabet = lowercase
         elif uppercase.__contains__(char):
-            isLowercase = False
+            alphabet = uppercase
         else:
             outputString += char
             continue
 
-        outputString += RotateLetter(char, isLowercase)
+        pos: int = alphabet.index(char) + 13
+        if pos > 25:
+            pos -= 26
+
+        outputString += alphabet[pos]
 
     return outputString
-
-def RotateLetter(char: str, isLowercase: bool) -> str:
-    alphabet: list[str] = lowercase if isLowercase else uppercase
-    pos: int = alphabet.index(char) + 13
-    if pos > 25:
-        pos -= 26
-    
-    print(len(alphabet))
-    return alphabet[pos]
 
 def PrintHelp():
     print("Provide an input string as an argument.")
